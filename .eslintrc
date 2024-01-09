@@ -1,0 +1,21 @@
+{
+  "env": {
+    "jest/globals": true
+  },
+  "parserOptions": {
+    "ecmaVersion": 2020
+  },
+  "extends": ["airbnb-base", "prettier"],
+  "plugins": ["prettier", "eslint-plugin-prettier", "eslint-plugin-jest"],
+  "rules": {
+    "semi": "error",
+    "quotes": ["error", "single"],
+    "no-unused-vars": "error",
+    "import/prefer-default-export": "off",
+    "import/extensions": "warn",
+    "no-restricted-syntax": "off",
+    "no-plusplus": "off",
+    "no-prototype-builtins": "off",
+    "max-len": "off"
+  }
+}

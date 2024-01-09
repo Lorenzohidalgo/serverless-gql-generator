@@ -1,0 +1,48 @@
+{
+  "name": "serverless-gql-generator",
+  "version": "0.0.0-development",
+  "description": "Serverless Framework Plugin to help generate GraphQL requests",
+  "main": "src/index.js",
+  "scripts": {
+    "test": "jest --coverage",
+    "lint": "eslint ./",
+    "linter": "npx eslint . --fix",
+    "prettier": "npx prettier --write ."
+  },
+  "jest": {
+    "testEnvironment": "node",
+    "coveragePathIgnorePatterns": [
+      "/node_modules/",
+      "/samples/"
+    ],
+    "testPathIgnorePatterns": [],
+    "transform": {
+      "^.+\\.js$": "babel-jest"
+    }
+  },
+  "dependencies": {
+    "@serverless/utils": "^6.15.0",
+    "graphql": "^16.8.1",
+    "lodash": "^4.17.21",
+    "postman-collection": "^4.3.0",
+    "prettier": "^3.1.1"
+  },
+  "peerDependencies": {
+    "serverless": ">=3.0.0"
+  },
+  "license": "MIT",
+  "devDependencies": {
+    "@babel/core": "^7.23.7",
+    "@babel/eslint-parser": "^7.23.3",
+    "@babel/preset-env": "^7.23.7",
+    "@types/jest": "^29.5.11",
+    "babel-jest": "^29.7.0",
+    "eslint": "^8.56.0",
+    "eslint-config-airbnb-base": "^15.0.0",
+    "eslint-config-prettier": "^9.1.0",
+    "eslint-plugin-import": "^2.29.1",
+    "eslint-plugin-jest": "^27.6.1",
+    "eslint-plugin-prettier": "^5.1.2",
+    "jest": "^29.7.0"
+  }
+}

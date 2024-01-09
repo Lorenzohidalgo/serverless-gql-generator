@@ -1,0 +1,65 @@
+{
+    "type": "object",
+    "properties": {
+        "schema": {
+            "type": "object",
+            "properties": {
+                "path": {
+                    "type": "string"
+                },
+                "encoding": {
+                    "type": "string"
+                },
+                "assumeValidSDL": {
+                    "type": "boolean"
+                }
+            },
+            "additionalProperties": {
+                "not": true
+            }
+        },
+        "environment": {
+            "type": "object",
+            "properties": {
+                "name": {
+                    "type": "string"
+                },
+                "url": {
+                    "type": "string"
+                },
+                "apiKey": {
+                    "type": "string"
+                }
+            },
+            "additionalProperties": {
+                "not": true
+            }
+        },
+        "output": {
+            "type": "object",
+            "properties": {
+                "directory": {
+                    "type": "string"
+                },
+                "requests": {
+                    "type": "string"
+                },
+                "postman": {
+                    "type": "boolean"
+                },
+                "useVariables": {
+                    "type": "integer"
+                },
+                "maxDepth": {
+                    "type": "integer"
+                }
+            },
+            "additionalProperties": {
+                "not": true
+            }
+        }
+    },
+    "additionalProperties": {
+        "not": true
+    }
+}

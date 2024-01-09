@@ -1,0 +1,8 @@
+node_modules
+.eslintcache
+build
+.env
+.npm
+package-lock.json
+.vscode
+coverage
