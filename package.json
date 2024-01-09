@@ -7,7 +7,8 @@
     "test": "jest --coverage",
     "lint": "eslint ./",
     "linter": "npx eslint . --fix",
-    "prettier": "npx prettier --write ."
+    "prettier": "npx prettier --write .",
+    "semantic-release": "semantic-release"
   },
   "jest": {
     "testEnvironment": "node",
@@ -20,6 +21,23 @@
       "^.+\\.js$": "babel-jest"
     }
   },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Lorenzohidalgo/serverless-gql-generator.git"
+  },
+  "release": {
+    "branches": [
+      "main"
+    ]
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "author": "Lorenzo Hidalgo",
+  "bugs": {
+    "url": "https://github.com/Lorenzohidalgo/serverless-gql-generator/issues"
+  },
+  "homepage": "https://github.com/Lorenzohidalgo/serverless-gql-generator#readme",
   "dependencies": {
     "@serverless/utils": "^6.15.0",
     "graphql": "^16.8.1",
@@ -43,6 +61,7 @@
     "eslint-plugin-import": "^2.29.1",
     "eslint-plugin-jest": "^27.6.1",
     "eslint-plugin-prettier": "^5.1.2",
-    "jest": "^29.7.0"
+    "jest": "^29.7.0",
+    "semantic-release": "^22.0.12"
   }
 }
