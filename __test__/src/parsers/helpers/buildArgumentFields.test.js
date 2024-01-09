@@ -3,7 +3,7 @@ const { loadAndGenerateSchema } = require('../../../../src/io');
 const { buildArgumentFields } = require('../../../../src/parsers/helpers/buildArgumentFields');
 
 describe('Test handler.js', () => {
-  const schemaFilePath = resolve('./samples/basic.graphql');
+  const schemaFilePath = resolve('./__test__/samples/basic.graphql');
   const gqlSchema = loadAndGenerateSchema(schemaFilePath, 'utf-8', true);
 
   test('test1', () => {
