@@ -5,7 +5,7 @@ const { parse, schema } = require('./plugin/config');
 const { loadAndGenerateSchema, saveAsFiles, saveAsPostman } = require('./io');
 const { parseSchema } = require('./parsers');
 
-class ServerlessPlugin {
+class ServerlessGQLGenerator {
   constructor(serverless, options, { progress }) {
     this.serverless = serverless;
     this.options = options;
@@ -143,4 +143,4 @@ class ServerlessPlugin {
   }
 }
 
-module.exports = ServerlessPlugin;
+module.exports = ServerlessGQLGenerator;
