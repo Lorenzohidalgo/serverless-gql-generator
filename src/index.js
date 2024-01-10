@@ -102,7 +102,7 @@ class ServerlessGQLGenerator {
         schema: { path, encoding, assumeValidSDL },
         output: { directory, requests, postman, useVariables, maxDepth },
       } = this.config;
-      if (!url && !apiKey) {
+      if (!url || !apiKey) {
         log.info('Domain Information not provided, fetching information');
         await this.gatherData();
       }
