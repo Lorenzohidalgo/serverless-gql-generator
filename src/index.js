@@ -98,23 +98,27 @@ class ServerlessGQLGenerator {
     try {
       this.loadConfig();
       const {
-        environment: { name, url, apiKey },
         schema: { path, encoding, assumeValidSDL },
-        output: { directory, requests, postman, useVariables, maxDepth },
+        output: { directory, rawRequests, postman, useVariables, maxDepth },
       } = this.config;
-      if (!url || !apiKey) {
-        log.info('Domain Information not provided, fetching information');
-        await this.gatherData();
+      if (!rawRequests && !postman) {
+        log.error('Both rawRequests and postman is set to false, nothing to be generated');
+        return;
       }
       log.info('Validating Schema');
       const gqlSchema = loadAndGenerateSchema(path, encoding, assumeValidSDL);
       log.info('Parsing Schema');
       const parsedSchema = await parseSchema(gqlSchema, useVariables, maxDepth);
-      if (requests) {
+      if (rawRequests) {
         log.info('Saving Raw Requests');
         saveAsFiles(directory, parsedSchema);
       }
       if (postman) {
+        const { name, url, apiKey } = postman;
+        if (!url || !apiKey) {
+          log.info('Domain Information not provided, fetching information');
+          await this.gatherData();
+        }
         log.info('Saving Postman Collection');
         saveAsPostman(
           directory,

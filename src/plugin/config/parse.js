@@ -6,13 +6,12 @@ const buildDefaults = (service, stage) => ({
     encoding: 'utf-8',
     assumeValidSDL: true,
   },
-  environment: { name: `${service}-${stage}`, url: null, apiKey: null },
   output: {
     directory: './output',
-    requests: false,
-    postman: true,
     useVariables: true,
     maxDepth: 10,
+    postman: { name: `${service}-${stage}`, url: null, apiKey: null },
+    rawRequests: false,
   },
 });
 
