@@ -1,14 +1,42 @@
 # serverless-gql-generator
 
-Serverless Framework Plugin to help generate GraphQL requests
+## 🚀 **What is it?**
 
-# Installation
+`serverless-gql-generator` is here to revolutionize your GraphQL development process! It brings seamless automation to the table, offering:
+
+### ✨ **Automatic GraphQL Request Generation:**
+
+Every deploy triggers automatic GraphQL request generation, ensuring your API requests are always up-to-date.
+
+### 📂 **Export to .graphql Files and Postman Collections:**
+
+Easily export generated requests as raw .graphql files and/or Postman collections. It's all about simplifying your workflow!
+
+### 🔐 **Automatic URL & API Key Retrieval:**
+
+No more manual hassle! `serverless-gql-generator` automatically fetches URL and API keys, streamlining your integration process.
+
+### 🔄 **Inline Input or .variables.json:**
+
+Choose your preferred way to generate requests - whether with inline input or through a handy .variables.json file.
+
+### ✨ **Why should you care?**
+
+Say goodbye to the tedious manual work of keeping your GraphQL requests in sync. With `serverless-gql-generator`, focus on building incredible applications while your GraphQL requests stay effortlessly up-to-date.
+
+# 🛠️ **How to get started:**
+
+## 1. Install and add the dependency to your project
+
+Use the following command to install the plugin and save as a `devDependency` in your project:
 
 ```
-npm install serverless-gql-generator
+npm install -D serverless-gql-generator
 ```
 
-# Quick start
+## 2. Add the Plugin
+
+Add the plugin under the `plugins` list in your `serverless.yml` file
 
 ```yaml
 service: my-app
@@ -17,14 +45,11 @@ plugins:
   - serverless-gql-generator
 ```
 
-## Default values and overrideable config
+## 3. (Optional) Override defaults
+
+If required, one can override the defaults by adding any of the following configuration attributes:
 
 ```yaml
-service: my-app
-
-plugins:
-  - serverless-gql-generator
-
 gql-generator:
   schema:
     path: ./schema.graphql # Overrides default schema path 
@@ -41,14 +66,26 @@ gql-generator:
       apiKey: abc-123 # Overrides default API Key if any
 ```
 
-# CLI
+## 4. Trigger the Request Generation
 
-## Schema Validate
+### Automatic trigger
+
+The Request generation will be triggered automatically on every deployment.
+
+### Manual - CLI trigger
+
+Additionally, developers can also use the following commands to manually trigger the following tasks
+
+#### **Schema Validation**
+
+Use the following CLI command to validate your GraphQL schema:
 ```
 serverless gql-generator validate-schema
 ```
 
-## Manual Requests generation
+#### **Requests generation**
+
+Use the following CLI command to trigger the Request generation without redeploying your current service:
 ```
 serverless gql-generator generate
 ```
