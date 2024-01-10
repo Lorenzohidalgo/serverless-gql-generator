@@ -48,6 +48,9 @@
   "peerDependencies": {
     "serverless": ">=3.0.0"
   },
+  "files": [
+    "/src"
+  ],
   "license": "MIT",
   "devDependencies": {
     "@babel/core": "^7.23.7",
