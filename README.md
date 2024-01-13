@@ -12,6 +12,10 @@ Every deploy triggers automatic GraphQL request generation, ensuring your API re
 
 Easily export generated requests as raw .graphql files and/or Postman collections. It's all about simplifying your workflow!
 
+### 🪣 **Upload the generated files to S3:**
+
+Easily upload all generated files to the desired S3 Buckets. Making it easier to share the files with your team!
+
 ### 🔐 **Automatic URL & API Key Retrieval:**
 
 No more manual hassle! `serverless-gql-generator` automatically fetches URL and API keys, streamlining your integration process.
@@ -59,7 +63,7 @@ gql-generator:
     directory: ./output # Output directory
     s3: # Enables Upload to AWS S3
       bucketName: gql-output-bucket # Mandatory Bucket name
-      folderPath: s3folder/path # Folder path inside s3 where the requests should be saved
+      folderPath: s3folder/path # Override Folder Path inside s3, defaults to `${service}/${stage}`
       skipLocalSaving: false # if the files should also be saved locally or not
     useVariables: true # use variables or have the input inline
     maxDepth: 10 # max depth for schema recursion
