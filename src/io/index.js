@@ -1,9 +1,7 @@
 const { loadAndGenerateSchema } = require('./loadSchema');
-const { saveAsFiles } = require('./saveAsFiles');
-const { saveAsPostman } = require('./saveAsPostman');
+const { saveLocal } = require('./saveLocal');
 
 module.exports = {
   loadAndGenerateSchema,
-  saveAsFiles,
-  saveAsPostman,
+  saveLocal,
 };

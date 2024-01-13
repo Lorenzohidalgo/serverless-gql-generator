@@ -1,7 +1,5 @@
 const { Collection, ItemGroup, Item, Url, RequestAuth } = require('postman-collection');
 
-const { mkdirSync, writeFileSync } = require('fs');
-const { resolve, join } = require('path');
 const { log } = require('@serverless/utils/log');
 
 const buildItemList = (operations, rawUrl) =>
@@ -23,7 +21,7 @@ const buildItemList = (operations, rawUrl) =>
       }),
   );
 
-const saveAsPostman = (destinationDirectory, parsedSchema, collectionName, rawUrl, apiKey) => {
+const generatePostman = (parsedSchema, collectionName, rawUrl, apiKey) => {
   if (!parsedSchema.mutations && !parsedSchema.queries && !parsedSchema.subscriptions) {
     throw new Error('No operations found to be saved');
   }
@@ -87,18 +85,15 @@ const saveAsPostman = (destinationDirectory, parsedSchema, collectionName, rawUr
      */
   }
 
-  try {
-    mkdirSync(resolve(destinationDirectory));
-  } catch (err) {
-    if (err.code !== 'EEXIST') throw err;
-  }
-
-  writeFileSync(
-    join(destinationDirectory, `./${collectionName}.postman_collection.json`),
-    JSON.stringify(newCollection, null, 2),
-  );
+  return [
+    {
+      folder: 'postman',
+      name: `${collectionName}.postman_collection.json`,
+      content: JSON.stringify(newCollection, null, 2),
+    },
+  ];
 };
 
 module.exports = {
-  saveAsPostman,
+  generatePostman,
 };

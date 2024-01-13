@@ -2,7 +2,8 @@ const { log } = require('@serverless/utils/log');
 const { forEach, last } = require('lodash');
 
 const { parse, schema } = require('./plugin/config');
-const { loadAndGenerateSchema, saveAsFiles, saveAsPostman } = require('./io');
+const { generateRaw, generatePostman } = require('./generators');
+const { loadAndGenerateSchema, saveLocal } = require('./io');
 const { parseSchema } = require('./parsers');
 
 class ServerlessGQLGenerator {
@@ -109,9 +110,11 @@ class ServerlessGQLGenerator {
       const gqlSchema = loadAndGenerateSchema(path, encoding, assumeValidSDL);
       log.info('Parsing Schema');
       const parsedSchema = await parseSchema(gqlSchema, useVariables, maxDepth);
+      const outputFiles = [];
       if (rawRequests) {
         log.info('Saving Raw Requests');
-        saveAsFiles(directory, parsedSchema);
+        const rawFiles = generateRaw(parsedSchema);
+        outputFiles.push(...rawFiles);
       }
       if (postman) {
         const { name, url, apiKey } = postman;
@@ -120,14 +123,16 @@ class ServerlessGQLGenerator {
           await this.gatherData();
         }
         log.info('Saving Postman Collection');
-        saveAsPostman(
-          directory,
+        const postmanFiles = generatePostman(
           parsedSchema,
           name,
           url ?? this.gatheredData.apiURLs.graphql[0],
           apiKey ?? this.gatheredData.apiKeys[0],
         );
+        outputFiles.push(...postmanFiles);
       }
+
+      saveLocal(directory, outputFiles);
       log.success('GraphQL Requests Generated');
     } catch (error) {
       throw new this.serverless.classes.Error(error.message);
