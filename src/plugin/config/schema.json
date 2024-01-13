@@ -24,6 +24,26 @@
                 "directory": {
                     "type": "string"
                 },
+                "s3": {
+                    "type": "object",
+                    "properties": {
+                        "bucketName": {
+                            "type": "string"
+                        },
+                        "folderPath": {
+                            "type": "string"
+                        },
+                        "skipLocalSaving": {
+                            "type": "boolean"
+                        }
+                    },
+                    "required": [
+                        "bucketName"
+                    ],
+                    "additionalProperties": {
+                        "not": true
+                    }
+                },
                 "useVariables": {
                     "type": "integer"
                 },

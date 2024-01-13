@@ -3,7 +3,7 @@ const { forEach, last } = require('lodash');
 
 const { parse, schema } = require('./plugin/config');
 const { generateRaw, generatePostman } = require('./generators');
-const { loadAndGenerateSchema, saveLocal } = require('./io');
+const { loadAndGenerateSchema, saveLocal, saveS3 } = require('./io');
 const { parseSchema } = require('./parsers');
 
 class ServerlessGQLGenerator {
@@ -23,6 +23,7 @@ class ServerlessGQLGenerator {
     this.provider = this.serverless.getProvider('aws');
 
     this.serverless.configSchemaHandler.defineTopLevelProperty('gql-generator', schema);
+    this.serverless.configValidationMode = 'error';
 
     this.commands = {
       'gql-generator': {
@@ -100,7 +101,7 @@ class ServerlessGQLGenerator {
       this.loadConfig();
       const {
         schema: { path, encoding, assumeValidSDL },
-        output: { directory, rawRequests, postman, useVariables, maxDepth },
+        output: { directory, s3, rawRequests, postman, useVariables, maxDepth },
       } = this.config;
       if (!rawRequests && !postman) {
         log.error('Both rawRequests and postman is set to false, nothing to be generated');
@@ -131,9 +132,23 @@ class ServerlessGQLGenerator {
         );
         outputFiles.push(...postmanFiles);
       }
+      log.info('GraphQL Requests Generated');
 
-      saveLocal(directory, outputFiles);
-      log.success('GraphQL Requests Generated');
+      if (!(s3.bucketName && s3.skipLocalSaving)) saveLocal(directory, outputFiles);
+
+      if (s3.bucketName) {
+        const {
+          service,
+          provider: { stage },
+        } = this.serverless.configurationInput;
+        const s3Config = {
+          bucketName: s3.bucketName,
+          serviceName: service,
+          stage,
+          folder: s3.folderPath,
+        };
+        await saveS3(this.provider, s3Config, outputFiles);
+      }
     } catch (error) {
       throw new this.serverless.classes.Error(error.message);
     }

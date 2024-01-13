@@ -8,6 +8,11 @@ const buildDefaults = (service, stage) => ({
   },
   output: {
     directory: './output',
+    s3: {
+      bucketName: null,
+      folderPath: null,
+      skipLocalSaving: false,
+    },
     useVariables: true,
     maxDepth: 10,
     postman: { name: `${service}-${stage}`, url: null, apiKey: null },

@@ -1,5 +1,6 @@
 const { mkdirSync, writeFileSync } = require('fs');
 const { join } = require('path');
+const { log } = require('@serverless/utils/log');
 
 const createDir = (path) => {
   try {
@@ -23,6 +24,8 @@ const saveLocal = (destinationDirectory, fileList) => {
   createDir(destinationDirectory);
 
   fileList.forEach((file) => saveFile(destinationDirectory, file.folder, file.name, file.content));
+
+  log.success('GraphQL Requests saved successfully');
 };
 
 module.exports = {

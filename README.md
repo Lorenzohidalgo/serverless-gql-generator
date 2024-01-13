@@ -57,6 +57,10 @@ gql-generator:
     assumeValidSDL: true
   output:
     directory: ./output # Output directory
+    s3: # Enables Upload to AWS S3
+      bucketName: gql-output-bucket # Mandatory Bucket name
+      folderPath: s3folder/path # Folder path inside s3 where the requests should be saved
+      skipLocalSaving: false # if the files should also be saved locally or not
     useVariables: true # use variables or have the input inline
     maxDepth: 10 # max depth for schema recursion
     rawRequests: false # set to true to generate raw requests
